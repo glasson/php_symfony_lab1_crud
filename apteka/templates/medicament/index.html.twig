@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Medicament index{% endblock %}
+
+{% block body %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>DateOfProduced</th>
+                <th>Return</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for medicament in medicaments %}
+            <tr>
+                <td>{{ medicament.id }}</td>
+                <td>{{ medicament.name }}</td>
+                <td>{{ medicament.dateOfProduced ? medicament.dateOfProduced|date('Y-m-d') : '' }}</td>
+                <td>{{ medicament.return }}</td>
+                <td>
+                    <a href="{{ path('app_medicament_show', {'id': medicament.id}) }}">show</a>
+                    <a href="{{ path('app_medicament_edit', {'id': medicament.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_medicament_new') }}">Create new</a>
+{% endblock %}
